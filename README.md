@@ -1,20 +1,59 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+## Compose sample application
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+### Use with Docker Development Environments
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+You can open this sample in the Dev Environments feature of Docker Desktop version 4.12 or later.
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+[Open in Docker Dev Environments <img src="../open_in_new.svg" alt="Open in Docker Dev Environments" align="top"/>](https://open.docker.com/dashboard/dev-envs?url=https://github.com/docker/awesome-compose/tree/master/django)
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+### Django application in dev mode
+
+Project structure:
+```
+.
+├── compose.yaml
+├── app
+    ├── Dockerfile
+    ├── requirements.txt
+    └── manage.py
+
+```
+
+[_compose.yaml_](compose.yaml)
+```
+services: 
+  web: 
+    build: app 
+    ports: 
+      - '8000:8000'
+```
+
+## Deploy with docker compose
+
+```
+$ docker compose up -d
+Creating network "django_default" with the default driver
+Building web
+Step 1/6 : FROM python:3.7-alpine
+...
+...
+Status: Downloaded newer image for python:3.7-alpine
+Creating django_web_1 ... done
+
+```
+
+## Expected result
+
+Listing containers must show one container running and the port mapping as below:
+```
+$ docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED              STATUS              PORTS                    NAMES
+3adaea94142d        django_web          "python3 manage.py r…"   About a minute ago   Up About a minute   0.0.0.0:8000->8000/tcp   django_web_1
+```
+
+After the application starts, navigate to `http://localhost:8000` in your web browser:
+
+Stop and remove the containers
+```
+$ docker compose down
+```
