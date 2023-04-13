@@ -29,4 +29,11 @@ jobs:
   - script: echo TestFail!
     displayName: Fail
 
+- job: Imaging
 
+  steps:
+  - task: Docker@2
+    inputs:
+      containerRegistry: 'docker'
+      command: 'buildAndPush'
+      Dockerfile: '**/Dockerfile'
