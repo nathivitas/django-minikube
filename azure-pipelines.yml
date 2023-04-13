@@ -35,5 +35,6 @@ jobs:
   - task: Docker@2
     inputs:
       containerRegistry: 'docker'
+      repository: 'demo'
       command: 'buildAndPush'
       Dockerfile: '**/Dockerfile'
