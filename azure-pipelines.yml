@@ -4,10 +4,6 @@ trigger:
 
 pool: default
 
-
-jobs:
-- job: test
-
   steps:
 #- script: echo Hello, world!
 #  displayName: 'Run a one-line script'
@@ -19,8 +15,9 @@ jobs:
     configMode: 'manual'
     cliProjectKey: 'demo_demo_AYd32B4Luc5_K2z0yugb'
     cliSources: '.'
+  
+  - task: SonarQubeAnalyze@55
 
-  - task: SonarQubeAnalyze@5
   - task: SonarQubePublish@5
   inputs:
    pollingTimeoutSec: '300'
