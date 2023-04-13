@@ -1,9 +1,11 @@
+apiVersion: networking.k8s.io/v1
 kind: Ingress
-apiVersion: v1
 metadata:
   name: demo-ingress
-  namespace: default
-  spec:
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: "nginx"
+spec:
    
   rules:
    
