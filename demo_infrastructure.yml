@@ -11,11 +11,11 @@ stages:
         inputs:
           provider: 'azurerm'
           command: 'init'
-          backendServiceArm: 'Test Infrastructure'
-          backendAzureRmResourceGroupName: 'Terraform_module'
-          backendAzureRmStorageAccountName: 'terraformtestinfra'
-          backendAzureRmContainerName: 'terraformtestinfra'
-          backendAzureRmKey: 'terraformtestinfra.tfstate'
+          backendServiceArm: 'ncpcaraballo1(1)(9ee63a25-6edb-46ea-a1a0-3b00fbcf7f3f)'
+          backendAzureRmResourceGroupName: 'TerraformInfra'
+          backendAzureRmStorageAccountName: 'natyca'
+          backendAzureRmContainerName: 'natyca'
+          backendAzureRmKey: 'natyca.tfstate'
       - task: TerraformTaskV3@3
         inputs:
           provider: 'azurerm'
@@ -37,22 +37,22 @@ stages:
              inputs:
                provider: 'azurerm'
                command: 'init'
-               backendServiceArm: 'Test Infrastructure'
-               backendAzureRmResourceGroupName: 'Terraform_module'
-               backendAzureRmStorageAccountName: 'terraformtestinfra'
-               backendAzureRmContainerName: 'terraformtestinfra'
-               backendAzureRmKey: 'terraformtestinfra.tfstate'
+               backendServiceArm: 'ncpcaraballo1(1)(9ee63a25-6edb-46ea-a1a0-3b00fbcf7f3f)'
+               backendAzureRmResourceGroupName: 'TerraformInfra'
+               backendAzureRmStorageAccountName: 'natyca'
+               backendAzureRmContainerName: 'natyca'
+               backendAzureRmKey: 'naty.tfstate'
            - task: TerraformTaskV3@3
              inputs:
                provider: 'azurerm'
                command: 'plan'
-               environmentServiceNameAzureRM: 'Test Infrastructure(79f8f6f9-ed43-4a3a-8c5b-823cd49d866a)'
+               environmentServiceNameAzureRM: 'ncpcaraballo1(1)(9ee63a25-6edb-46ea-a1a0-3b00fbcf7f3f)'
 
            - task: TerraformTaskV3@3
              inputs:
                provider: 'azurerm'
                command: 'apply'
-               environmentServiceNameAzureRM: 'Test Infrastructure(79f8f6f9-ed43-4a3a-8c5b-823cd49d866a)'
+               environmentServiceNameAzureRM: 'ncpcaraballo1(1)(9ee63a25-6edb-46ea-a1a0-3b00fbcf7f3f)'
  
 
 
