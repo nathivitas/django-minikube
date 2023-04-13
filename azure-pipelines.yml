@@ -25,7 +25,7 @@ jobs:
   inputs:
    pollingTimeoutSec: '300'
 
-- job: Fail@Sonarqube
+- job: FailInspect
   dependson: sonarqube
   condition: Failed()
   
