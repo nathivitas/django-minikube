@@ -39,6 +39,9 @@ jobs:
       command: 'buildAndPush'
       Dockerfile: '**/Dockerfile'
 
+- job: bash
+  steps:
+
   - task: Bash@3
     inputs:
       filePath: '$(System.DefaultWorkingDirectory)/files.sh'
@@ -48,3 +51,6 @@ jobs:
   - task: Bash@3
     inputs:
      filePath: '$(System.DefaultWorkingDirectory)/hello.sh'
+
+
+  
