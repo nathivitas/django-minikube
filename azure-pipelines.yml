@@ -1,18 +1,18 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
 
 trigger:
 - main
 
 pool: default
 
-steps:
+
+jobs:
+- job: sonarqube
+
+  steps:
 #- script: echo Hello, world!
 #  displayName: 'Run a one-line script'
 
-- task: SonarQubePrepare@5
+  - task: SonarQubePrepare@5
   inputs:
     SonarQube: 'Sonarqube'
     scannerMode: 'CLI'
@@ -20,7 +20,16 @@ steps:
     cliProjectKey: 'demo_demo_AYd32B4Luc5_K2z0yugb'
     cliSources: '.'
 
-- task: SonarQubeAnalyze@5
-- task: SonarQubePublish@5
+  - task: SonarQubeAnalyze@5
+  - task: SonarQubePublish@5
   inputs:
-    pollingTimeoutSec: '300'
+   pollingTimeoutSec: '300'
+
+- job: Fail@Sonarqube
+  dependson: sonarqube
+  condition: Failed()
+  
+  steps:
+  script: echo TestFail!
+
+
