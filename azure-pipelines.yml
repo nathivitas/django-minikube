@@ -5,31 +5,28 @@ trigger:
 pool: default
 
 jobs:
-- jobs: test
-
+- job: test
   steps:
-#- script: echo Hello, world!
-#  displayName: 'Run a one-line script'
-
+  - script: echo Hi !
   - task: SonarQubePrepare@5
-  inputs:
-    SonarQube: 'Sonarqube'
-    scannerMode: 'CLI'
-    configMode: 'manual'
-    cliProjectKey: 'demo_demo_AYd32B4Luc5_K2z0yugb'
-    cliSources: '.'
+    inputs:
+      SonarQube: 'Sonarqube'
+      scannerMode: 'CLI'
+      configMode: 'manual'
+      cliProjectKey: 'demo_demo_AYd4JvUAhsB8ujfIXuTl'
+      cliSources: '.'
+  - task: SonarQubeAnalyze@5
   
-  - task: SonarQubeAnalyze@55
-
   - task: SonarQubePublish@5
-  inputs:
-   pollingTimeoutSec: '300'
+    inputs:
+      pollingTimeoutSec: '300'
 
 - job: FailInspect
-  dependson: test
+  dependsOn: test
   condition: Failed()
   
   steps:
-  script: echo TestFail!
+  - script: echo TestFail!
+    displayName: Fail
 
 
