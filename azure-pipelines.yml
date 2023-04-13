@@ -4,6 +4,9 @@ trigger:
 
 pool: default
 
+jobs:
+- jobs: test
+
   steps:
 #- script: echo Hello, world!
 #  displayName: 'Run a one-line script'
@@ -23,7 +26,7 @@ pool: default
    pollingTimeoutSec: '300'
 
 - job: FailInspect
-  dependson: sonarqube
+  dependson: test
   condition: Failed()
   
   steps:
