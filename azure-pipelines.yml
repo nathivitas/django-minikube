@@ -6,7 +6,7 @@ pool: default
 
 
 jobs:
-- job: sonarqube
+- job: test
 
   steps:
 #- script: echo Hello, world!
