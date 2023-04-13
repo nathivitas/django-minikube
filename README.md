@@ -1,5 +1,9 @@
 ## Compose sample application
 
+
+### Naty's message: being a  MAC user has its disadvantages, had to set up my entire environment and that was an inconvenience and delay.
+### I started AKS in azure but ran into billing issues, then moved to minikube which I discovered misses a driver on MAC.
+
 ### Use with Docker Development Environments
 
 You can open this sample in the Dev Environments feature of Docker Desktop version 4.12 or later.
