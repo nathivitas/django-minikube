@@ -1,0 +1,59 @@
+stages:
+  - stage: validate
+    jobs:
+    - job: validate
+      continueOnError: false
+      steps:
+      - task: TerraformInstaller@0
+        inputs:
+          terraformVersion: 'latest'
+      - task: TerraformTaskV3@3
+        inputs:
+          provider: 'azurerm'
+          command: 'init'
+          backendServiceArm: 'Test Infrastructure'
+          backendAzureRmResourceGroupName: 'Terraform_module'
+          backendAzureRmStorageAccountName: 'terraformtestinfra'
+          backendAzureRmContainerName: 'terraformtestinfra'
+          backendAzureRmKey: 'terraformtestinfra.tfstate'
+      - task: TerraformTaskV3@3
+        inputs:
+          provider: 'azurerm'
+          command: 'validate'
+  - stage: deploy
+    jobs:
+    - deployment: Production_Deployment
+      continueOnError: false
+      environment: 'Production'
+      strategy:
+       runOnce:
+        deploy:
+         steps:
+           - checkout: self
+           - task: TerraformInstaller@0
+             inputs:
+               terraformVersion: 'latest'
+           - task: TerraformTaskV3@3
+             inputs:
+               provider: 'azurerm'
+               command: 'init'
+               backendServiceArm: 'Test Infrastructure'
+               backendAzureRmResourceGroupName: 'Terraform_module'
+               backendAzureRmStorageAccountName: 'terraformtestinfra'
+               backendAzureRmContainerName: 'terraformtestinfra'
+               backendAzureRmKey: 'terraformtestinfra.tfstate'
+           - task: TerraformTaskV3@3
+             inputs:
+               provider: 'azurerm'
+               command: 'plan'
+               environmentServiceNameAzureRM: 'Test Infrastructure(79f8f6f9-ed43-4a3a-8c5b-823cd49d866a)'
+
+           - task: TerraformTaskV3@3
+             inputs:
+               provider: 'azurerm'
+               command: 'apply'
+               environmentServiceNameAzureRM: 'Test Infrastructure(79f8f6f9-ed43-4a3a-8c5b-823cd49d866a)'
+ 
+
+
+
